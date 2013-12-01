@@ -1,0 +1,59 @@
+name:                MolcasGnuplot
+
+-- The package version.  See the Haskell package versioning policy (PVP) 
+-- for standards guiding when and how versions should be incremented.
+-- http://www.haskell.org/haskellwiki/Package_versioning_policy
+-- PVP summary:      +-+------- breaking API changes
+--                   | | +----- non-breaking API additions
+--                   | | | +--- code changes with no API change
+version:             0.1.0.0
+
+-- A short (one-line) description of the package.
+synopsis:          Molecular Dynamics Gnuplot
+
+-- A longer description of the package.
+-- description:         
+
+-- URL for the project homepage or repository.
+homepage:            http://www2.uah.es/resmol/
+license:             BSD4
+license-file:        LICENSE
+author:              Alessio Valentini
+
+-- An email address to which users can send suggestions, bug reports, and 
+-- patches.
+maintainer:          acuonweb@tin.it
+category:            computational chemistry
+
+build-type:          Simple
+
+-- Constraint on the version of Cabal needed to build this package.
+cabal-version:       >=1.8
+
+Flag debug
+    Description: Enable debug features
+    Default:False
+
+
+executable MolcasGnuplot
+  ghc == 7.*
+  ghc-options:
+    -rtsopts
+    -threaded
+  build-depends:
+      base >= 4.5 && < 4.6
+    , directory
+    , parsec == 3.1.*
+    , ParsecTools
+    , transformers == 0.3.*
+    , process   == 1.1.*
+    , split
+    , shqq
+    
+    
+
+  hs-source-dirs:      src
+  main-is: Main.hs
+  other-modules:  
+
+ 
