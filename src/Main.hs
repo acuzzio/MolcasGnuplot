@@ -62,7 +62,7 @@ createGnuplotFile file dt n rlxRt = do
           jen x  = case head x of
                     Pop -> zip3 x hexColo tag
                     Ene -> zip3 x colors tag
-                    Dyn -> zip3 x hexColo tag --hexColo tag do not matter
+                    Dyn -> zip3 x hexColo tag --hexColo tag does not matter
           lol    = concat $ map jen groupZ -- lol :: [(PlotType, String, String)]
           almost = zipWith (\x y -> createPlotLine x y dt) lol removerlXtootfilename
           secondPart = concat almost
