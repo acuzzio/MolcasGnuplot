@@ -50,9 +50,9 @@ createGnuplotFile :: FilePath -> String -> Int -> Int -> IO()
 createGnuplotFile file dt n rlxRt = do 
       let fileZ  = takeWhile (/='.') file
           hexColo= ["#E5E5E5","#778899","#A9A9A9","#5F9EA0","#778899","#B0C4DE"]
-          colors = ["blue","red","green","yellow","blueviolet","darkgoldenrod"]
+          colors = ["green","red","blue","yellow","blueviolet","darkgoldenrod"]
           tag    = map (\x -> "S" ++ (show x)) [0..]
-          header = "set title \"" ++ fileZ ++ " Population and Energies\"\nset xlabel \"fs\"\nset format y \"%6.3f\"\nset y2range[0:1.001]\nset output '" ++ fileZ ++ "EnergiesPopulation.png'\nset terminal pngcairo size 1024,630 enhanced font \", 15\"\nplot " 
+          header = "set title \"" ++ fileZ ++ " Population and Energies\"\nset xlabel \"fs\"\nset format y \"%6.3f\"\nset y2range[0:1.001]\nset output '" ++ fileZ ++ "EnergiesPopulation.png'\nset terminal png size 2048,1260 enhanced font \", 25\"\nplot " 
           states = div (n-1) 2
           filenames = map (\x -> "sdafrffile" ++ (show x)) [1..]
           list   = (take states $ repeat Pop) ++ (take states $ repeat Ene) ++ [Dyn]
@@ -71,8 +71,8 @@ createGnuplotFile file dt n rlxRt = do
 
 createPlotLine :: (PlotType, String, String) -> FilePath -> String -> String
 createPlotLine (Pop,c,d) b dt = "\"" ++ b ++ "\"" ++ " u ($0*" ++ (fromAUtoFemtoDT dt) ++ "):1 axes x1y2 w filledcurves x1 lt 1 lc rgb " ++ "\"" ++ c ++ "\"" ++ " t '" ++ d ++ " Population',"
-createPlotLine (Ene,c,d) b dt = "\"" ++ b ++ "\"" ++ " u ($0*" ++ (fromAUtoFemtoDT dt) ++ "):1 w lines linecolor rgb " ++ "\"" ++ c ++ "\"" ++ " t " ++ "\"" ++ d ++ "\","
-createPlotLine (Dyn,c,d) b dt = "\"" ++ b ++ "\"" ++ " u ($0*" ++ (fromAUtoFemtoDT dt) ++ "):1 w lines linecolor rgb \"black\" lt \"dashed\" lw 3 t \"RlxRoot\""
+createPlotLine (Ene,c,d) b dt = "\"" ++ b ++ "\"" ++ " u ($0*" ++ (fromAUtoFemtoDT dt) ++ "):1 w lines lw 5 linecolor rgb " ++ "\"" ++ c ++ "\"" ++ " t " ++ "\"" ++ d ++ "\","
+createPlotLine (Dyn,c,d) b dt = "\"" ++ b ++ "\"" ++ " u ($0*" ++ (fromAUtoFemtoDT dt) ++ "):1 w lines lw 2 linecolor rgb \"black\" t \"RlxRoot\""
 
 fromAUtoFemtoDT :: String -> String
 fromAUtoFemtoDT dt = let read2 x = read x :: Double
